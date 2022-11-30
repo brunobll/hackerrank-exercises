@@ -1,42 +1,128 @@
-//INSERTION SORT - PART 1
-//Retry -> the code actually worked but didn't passed the 3 locked tests 
+//Solution using the hackerrank tests and inputs
 
 #include<iostream> 
-using namespace std;
- 
-int main() {
-    int arrSize; 
-    int lastElement;
+using namespace std; 
+
+void printArray(int *arrayTeste, int sizeOfArray){
     
-    cin >> arrSize;
-    int numbers[arrSize];
-    
-    for(int i = 0; i < arrSize; i++){
-        cin >> numbers[i];
+    for(int i = 0; i < sizeOfArray; i++){
+        cout << arrayTeste[i] << " ";
     }
 
-    lastElement = numbers[arrSize - 1];
-    numbers[arrSize - 1] = numbers[arrSize - 2];  
-    
-    for(int j = arrSize - 2; j >= 0; j--){
+    cout << endl;    
+}
 
-        for(int k = 0; k < arrSize; k++){
-            cout << numbers[k] << " ";
-        }
-        cout << endl;
+void insertionSort(int *arrayOfNumbers, int sizeOfArray){
+    int lastElement = arrayOfNumbers[sizeOfArray - 1];
+
+    for(int i = sizeOfArray - 2; i >= 0; i--){    
+
+        if(arrayOfNumbers[i] > lastElement){
+
+            
+            if(i != 0){
                 
-        if(numbers[j] > lastElement){
-            
-            if(numbers[j-1] < lastElement){
-                numbers[j] = lastElement;
+                arrayOfNumbers[i+1] = arrayOfNumbers[i];
+                printArray(arrayOfNumbers, sizeOfArray);
             }
-            else{
-                numbers[j] = numbers[j-1];
+
+        
+            else if(i == 0){
+                arrayOfNumbers[i+1] = arrayOfNumbers[i];
+                printArray(arrayOfNumbers, sizeOfArray);
+                arrayOfNumbers[i] = lastElement;
+                printArray(arrayOfNumbers, sizeOfArray);
+                break;
             }
-            
         }
 
+        else if(arrayOfNumbers[i] < lastElement){
+            arrayOfNumbers[i+1] = lastElement;
+            printArray(arrayOfNumbers, sizeOfArray);
+            break;
+        }
+
+        else if(arrayOfNumbers[i] == lastElement){
+            arrayOfNumbers[i] = lastElement;
+            printArray(arrayOfNumbers, sizeOfArray);
+        }
     }
+
+}
+
+int main(){
+    int sizeOfArray;
+    
+    cin >> sizeOfArray;
+    int arrayOfNumbers[sizeOfArray];
+
+    for(int z = 0; z < sizeOfArray; z++){
+        cin >> arrayOfNumbers[z];
+    }
+
+    insertionSort(arrayOfNumbers, sizeOfArray);
 
     return 0;
+}
+
+-----------------------------------------------------------------------------
+//Solution made in Sublime Text using main-declared tests
+
+#include<iostream> 
+using namespace std; 
+
+void printArray(int *arrayTeste, int sizeOfArray){
+	
+	for(int i = 0; i < sizeOfArray; i++){
+		cout << arrayTeste[i] << " ";
+	}
+
+	cout << endl;	
+}
+
+void insertionSort(int *arrayOfNumbers, int sizeOfArray){
+	int lastElement = arrayOfNumbers[sizeOfArray - 1];
+
+	for(int i = sizeOfArray - 2; i >= 0; i--){	
+
+		if(arrayOfNumbers[i] > lastElement){
+
+			//if i != 0, than i isn`t in the first index of the array
+			if(i != 0){
+				
+				arrayOfNumbers[i+1] = arrayOfNumbers[i];
+				printArray(arrayOfNumbers, sizeOfArray);
+			}
+
+			//if i == 0, than the counter is on the first index in the array
+			else if(i == 0){
+				arrayOfNumbers[i+1] = arrayOfNumbers[i];
+				printArray(arrayOfNumbers, sizeOfArray);
+				arrayOfNumbers[i] = lastElement;
+				printArray(arrayOfNumbers, sizeOfArray);
+				break;
+			}
+		}
+
+		else if(arrayOfNumbers[i] < lastElement){
+			arrayOfNumbers[i+1] = lastElement;
+			printArray(arrayOfNumbers, sizeOfArray);
+			break;
+		}
+
+		else if(arrayOfNumbers[i] == lastElement){
+			arrayOfNumbers[i] = lastElement;
+			printArray(arrayOfNumbers, sizeOfArray);
+		}
+	}
+
+}
+
+int main(){
+	int sizeOfArray = 5;
+	int arrayOfNumbers[sizeOfArray] = {1, 2, 4, 5, 3};
+
+	insertionSort(arrayOfNumbers, sizeOfArray);
+
+	return 0;
 }
